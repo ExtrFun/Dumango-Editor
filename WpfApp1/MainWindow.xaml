@@ -10,14 +10,14 @@
         <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
     </Window.CommandBindings>
     <DockPanel>
-            <Menu DockPanel.Dock = "Top">
-                <MenuItem Header="_File">
-                    <MenuItem Header="_New" Click="mnuNew_Click"/>
-                    <MenuItem Header="_Open" Click="mnuOpen_Click"/>
-                    <MenuItem Header="_Save" Click="mnuSave_Click"/>
-                    <Separator/>
-                    <MenuItem Header="_Exit" Click="mnuExit_Click"/>
-                </MenuItem>
+        <Menu DockPanel.Dock = "Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Click="mnuNew_Click"/>
+                <MenuItem Header="_Open" Click="mnuOpen_Click"/>
+                <MenuItem Header="_Save" Click="mnuSave_Click"/>
+                <Separator/>
+                <MenuItem Header="_Exit" Click="mnuExit_Click"/>
+            </MenuItem>
             <MenuItem Header="_Edit">
                 <MenuItem Command="ApplicationCommands.Cut" CommandTarget="{Binding ElementName=TxtInput}"/>
                 <MenuItem Command="ApplicationCommands.Copy" CommandTarget="{Binding ElementName=TxtInput}"/>
@@ -32,7 +32,12 @@
                 <MenuItem Header="_Status bar" Click="mnuStatusBar_Click"/>
                 <MenuItem Header="_Word wrap" Click="mnuWordWrap_Click"/>
             </MenuItem>
-            <TextBox x:Name="TxtInput" Height="265" TextWrapping="Wrap" Width="400" RenderTransformOrigin="0.502,0.529" Margin="-7,0,0,0"/>
-            </Menu>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="statusText" Margin="0,-3,0,0"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+        <TextBox x:Name="TxtInput" Height="265" TextWrapping="Wrap" Width="400" RenderTransformOrigin="0.502,0.529" SelectionChanged="TxtInput_SelectionChanged"/>
     </DockPanel>
 </Window>

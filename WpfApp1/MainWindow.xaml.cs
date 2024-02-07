@@ -20,6 +20,7 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            statusText.Visibility = Visibility.Visible; // Eller Visibility.Collapsed
         }
 
         private void mnuNew_Click(object sender, RoutedEventArgs e)
@@ -37,11 +38,11 @@ namespace WpfApp1
             {
                 // Læser filen fra den valgte sti og viser indholdet i TxtInput
                 TxtInput.Text = File.ReadAllText(openFileDialog.FileName);
-                MessageBox.Show("Tekst hentet!");
+                MessageBox.Show("Text recieved!");
             }
             else
             {
-                MessageBox.Show("Ingen fil valgt.");
+                MessageBox.Show("No file chosen.");
             }
         }
 
@@ -56,20 +57,20 @@ namespace WpfApp1
             {
                 // Gemmer filen til den valgte sti
                 File.WriteAllText(saveFileDialog.FileName, TxtInput.Text);
-                MessageBox.Show("Tekst gemt!");
+                MessageBox.Show("Text saved.");
             }
         }
 
         private void mnuExit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Dumango Editor", "Vil du gemme ændringer før du afslutter?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Dumango Editor", "Du you want to save before exiting?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
             switch (result)
             {
                 case MessageBoxResult.Yes:
                     // Gem ændringerne
                     File.WriteAllText(filePath, TxtInput.Text);
-                    MessageBox.Show("Ændringer gemt.");
+                    MessageBox.Show("Changes saved.");
                     this.Close();
                     break;
                 case MessageBoxResult.No:
@@ -116,7 +117,22 @@ namespace WpfApp1
 
         private void mnuStatusBar_Click(object sender, RoutedEventArgs e)
         {
-            
+            // Skifter statusbaren mellem synlig og skjult
+            if (statusText.Visibility == Visibility.Visible)
+            {
+                statusText.Visibility = Visibility.Collapsed; // Skjuler statusbaren
+            }
+            else
+            {
+                statusText.Visibility = Visibility.Visible; // Viser statusbaren
+            }
+        }
+
+        private void TxtInput_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            int row = TxtInput.GetLineIndexFromCharacterIndex(TxtInput.CaretIndex) + 1;
+            int col = TxtInput.CaretIndex - TxtInput.GetCharacterIndexFromLineIndex(TxtInput.GetLineIndexFromCharacterIndex(TxtInput.CaretIndex)) + 1;
+            statusText.Text = $"Line: {row}, Column: {col}";
         }
 
         private void mnuWordWrap_Click(object sender, RoutedEventArgs e)
