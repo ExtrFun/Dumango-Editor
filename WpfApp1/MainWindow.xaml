@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Dumango Editor" Height="300" Width="400">
+        Title="Dumango Editor" Height="300" Width="400" Icon="/700804.png">
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
     </Window.CommandBindings>

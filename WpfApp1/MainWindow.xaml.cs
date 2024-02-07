@@ -16,7 +16,7 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
 
-        private string filePath = "savedPage.txt";
+        private string filePath = "";
         public MainWindow()
         {
             InitializeComponent();
