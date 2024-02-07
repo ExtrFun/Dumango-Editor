@@ -63,7 +63,7 @@ namespace WpfApp1
 
         private void mnuExit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Dumango Editor", "Du you want to save before exiting?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Dumango Editor", "Do you want to save before exiting?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
             switch (result)
             {
@@ -132,7 +132,8 @@ namespace WpfApp1
         {
             int row = TxtInput.GetLineIndexFromCharacterIndex(TxtInput.CaretIndex) + 1;
             int col = TxtInput.CaretIndex - TxtInput.GetCharacterIndexFromLineIndex(TxtInput.GetLineIndexFromCharacterIndex(TxtInput.CaretIndex)) + 1;
-            statusText.Text = $"Line: {row}, Column: {col}";
+            int chr = TxtInput.Text.Length;
+            statusText.Text = $"Line: {row}, Column: {col}, Charachters: {chr}";
         }
 
         private void mnuWordWrap_Click(object sender, RoutedEventArgs e)
