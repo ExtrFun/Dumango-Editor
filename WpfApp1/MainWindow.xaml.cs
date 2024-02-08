@@ -36,13 +36,22 @@ namespace WpfApp1
 
             if (openFileDialog.ShowDialog() == true)
             {
-                // Læser filen fra den valgte sti og viser indholdet i TxtInput
-                TxtInput.Text = File.ReadAllText(openFileDialog.FileName);
-                MessageBox.Show("Text recieved!");
-            }
-            else
-            {
-                MessageBox.Show("No file chosen.");
+                string[] content = File.ReadAllLines(openFileDialog.FileName);
+                if (content.Length > 0)
+                {
+                    // Antager at den første linje af tektsen indenholder font størrelsen
+                    if (double.TryParse(content[0], out double fontSize))
+                    {
+                        TxtInput.FontSize = fontSize;
+                        // Resten af filen er teksten
+                        TxtInput.Text = string.Join("\n", content.Skip(1));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fejl ved indlæsning af fontstørrelse. Kontroller filformatet");
+                    }
+                }
+                MessageBox.Show("Text recieved.");
             }
         }
 
@@ -56,7 +65,8 @@ namespace WpfApp1
             if (saveFileDialog.ShowDialog() == true)
             {
                 // Gemmer filen til den valgte sti
-                File.WriteAllText(saveFileDialog.FileName, TxtInput.Text);
+                string contentToSave = $"{TxtInput.FontSize}\n{TxtInput.Text}";
+                File.WriteAllText(saveFileDialog.FileName, contentToSave);
                 MessageBox.Show("Text saved.");
             }
         }
