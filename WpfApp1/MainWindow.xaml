@@ -9,7 +9,7 @@
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed"/>
     </Window.CommandBindings>
-    <DockPanel>
+    <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock = "Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" Click="mnuNew_Click"/>
@@ -38,6 +38,8 @@
                 <TextBlock x:Name="statusText" Margin="0,-3,0,0"></TextBlock>
             </StatusBarItem>
         </StatusBar>
-        <TextBox x:Name="TxtInput" Height="265" TextWrapping="Wrap" Width="400" RenderTransformOrigin="0.502,0.529" SelectionChanged="TxtInput_SelectionChanged"/>
+        <TextBox x:Name="TxtInput" AcceptsReturn="True" AcceptsTab="True"
+                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                 TextWrapping="Wrap" SelectionChanged="TxtInput_SelectionChanged"/>
     </DockPanel>
 </Window>
